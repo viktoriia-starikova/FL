@@ -1,0 +1,58 @@
+{% extends 'BlogProject/main.html' %}
+  {% block main_section %}
+      <div class="alert alert-light">
+        <a href="{% url 'blog-home'%}">Вернуться назад</a>
+        <h1>{{object.title }}</h1>
+        <p>{{object.text|safe}}</p>
+        <div class="row">
+          <div>
+            <img src="{{object.avtor.profile.img.url }}" alt="{{object.avtor}}" class="user_image">
+          </div>
+          <div class="mt-2">
+            <span class="text-muted"><b>Дата: </b>{{object.date|date:"d F Y в H:i:s"}}</span>
+            {% if object.avtor %}
+              <p><b>Автор:</b><a href="{% url 'user-post' object.avtor %}">{{post.avtor}}</a></p>
+            {% else %}
+              <p><b>Автор:</b><a href="{% url 'user-post' object.avtor %}">Администратор</a></p>
+            {% endif %}
+          </div>
+        </div>
+        {% if object.avtor == user %}
+          <hr>
+          <a href="{% url 'post-update' object.id %}" class="btn btn-info btn-block">Редактировать</a>
+          <a href="{% url 'post-delete' object.id %}" class="btn btn-danger btn-block">Удалить</a>
+        {% endif %}
+      </div>
+
+{% endblock main_section %}
+
+{% block aside_section %}
+  <div class='p-3 rounded nb-3'>
+  <p>
+    <h3><b>Знакомство с простейшей нейронной сетью и ее пошаговая реализация</b></h3>
+    <div class="p-3 mb-3">
+      <img src='https://habrastorage.org/getpro/habr/post_images/747/592/94e/74759294e47907f3e8ba14438ab66001.jpg' class="img-thumbnail">
+    </div>
+    <p>Эта статья для тех, кто хочет заниматься нейронными сетями и машинным обучением, но пока с трудом понимает эту удивительную область науки. Ниже будет описан самый простой скелет
+    кода нейронной сети, чтобы многие поняли простейший принцип построения и взаимодействия всего того, из чего состоит эта нейронная сеть.</p>
+    <a href="https://habr.com/ru/post/440190/" title="Посмотреть на habr" target="_blank">
+      <button class="btn btn-warning">
+        Посмотреть
+      </button>
+    </a>
+  </p>
+  <p>
+    <h3><b>Разгоняем обработку событий до 1,6 миллионов в секунду</b></h3>
+    <div class="p-3 mb-3">
+      <img src='https://habrastorage.org/webt/q8/s-/cq/q8s-cqlxfrv8abkdotnudzeq1u8.jpeg' class="img-thumbnail">
+    </div>
+    <p>Когда участники HighLoad++ пришли на доклад Александра Крашенинникова, они надеялись услышать про обработку 1 600 000 событий в секунду. Ожидания не оправдались…
+      Потому что во время подготовки к выступлению эта цифра улетела до 1 800 000 — так, на HighLoad++ реальность превосходит ожидания.</p>
+    <a href="https://habr.com/ru/company/badoo/blog/442616/" title="Посмотреть на habr" target="_blank">
+      <button class="btn btn-warning">
+        Посмотреть
+      </button>
+    </a>
+  </p>
+  </div>
+{% endblock aside_section %}

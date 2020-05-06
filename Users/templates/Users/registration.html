@@ -1,0 +1,31 @@
+{% extends 'BlogProject/main.html' %}
+{% load crispy_forms_tags %}
+  {% block main_section %}
+  <div class="form-section">
+    <h2>Регистрация на сайте</h2>
+    <form  method="post">
+      {% csrf_token %}
+      {{form|crispy }}
+      <button type="submit" class="btn btn-outline-warning btn-block btn-dark" name="button">Зарегистрироваться</button>
+    </form>
+    <hr>
+    Вы уже зарегистрированы? <a href="{% url 'user' %}" >Войти в личный кабинет.</a>
+  </div>
+  {% endblock main_section %}
+
+  {% block aside_section %}
+  <div class=' p-3 rounded nb-3'>
+    <h3><b>HTML, который мы потеряли</b></h3>
+      <p>В этом году исполняется 30 лет с тех пор, как Бернерс-Ли начал разрабатывать язык HTML. С тех пор мы прошли долгий путь, начиная с восхищения новой технологией,
+         и заканчивая лечением интернет-зависимости и цензурой. Каких только бед не принес нам Интернет, взломанные пароли, кража личных данных,
+         компьютерные вирусы, черви, а теперь даже вирусы-вымогатели. Вы когда-нибудь задумывались, почему Сеть до сих пор остается такой нестабильной и уязвимой?
+         Где-то на этом длинном пути мы свернули не туда? Давайте разбираться.HTML 1.0, опубликованный в 1993 году, включал всего 13 элементов
+         (считая только те, которые сохранились до наших дней):
+        <br><i><b>a, address, base, dd, dir, dl, dt, h1..h6, li, p, plaintext, title, ul</i></b></p>
+    <a href="https://habr.com/ru/post/440336/" title="Посмотреть на habr" target="_blank">
+      <button class="btn btn-warning">
+        Посмотреть
+      </button>
+    </a>
+  </div>
+  {% endblock aside_section %}

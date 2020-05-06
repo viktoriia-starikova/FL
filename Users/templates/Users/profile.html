@@ -1,0 +1,55 @@
+{% extends 'BlogProject/main.html' %}
+{% load crispy_forms_tags %}
+  {% block main_section %}
+  <div class="form-section">
+    <h2>Личный кабинет</h2>
+    <div class="media text-muted pt-3">
+      <svg class="mr-2 rounded" width="0" height="0" >
+        <img class="mr-2 rounded" style="width: 164px; height: 164px;" src="{{ user.profile.img.url }}"> </img>
+      </svg>
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">@{{user.username}}</strong>
+        {% if user.email != "" %}
+          <b>Email: </b>{{user.email}}
+        {% endif %}
+      </p>
+    </div>
+    <h3 class="mt-4">Редактировать данные пользователя</h3>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{update_user|crispy }}
+      {{img_profile|crispy }}
+      <button type="submit" class="btn btn-outline-warning btn-block btn-dark" name="button">Обновить данные</button>
+    </form>
+  </div>
+  {% endblock main_section %}
+
+  {% block aside_section %}
+  <div class=' p-3 rounded nb-3'>
+    <h3><b>HTML, который мы потеряли</b></h3>
+      <p>В этом году исполняется 30 лет с тех пор, как Бернерс-Ли начал разрабатывать язык HTML. С тех пор мы прошли долгий путь, начиная с восхищения новой технологией,
+         и заканчивая лечением интернет-зависимости и цензурой. Каких только бед не принес нам Интернет, взломанные пароли, кража личных данных,
+         компьютерные вирусы, черви, а теперь даже вирусы-вымогатели. Вы когда-нибудь задумывались, почему Сеть до сих пор остается такой нестабильной и уязвимой?
+         Где-то на этом длинном пути мы свернули не туда? Давайте разбираться.HTML 1.0, опубликованный в 1993 году, включал всего 13 элементов
+         (считая только те, которые сохранились до наших дней):
+        <br><i><b>a, address, base, dd, dir, dl, dt, h1..h6, li, p, plaintext, title, ul</i></b></p>
+    <a href="https://habr.com/ru/post/440336/" title="Посмотреть на habr" target="_blank">
+      <button class="btn btn-warning">
+        Посмотреть
+      </button>
+    </a>
+    <p>
+    <h3><b>Дефекты лайков</b></h3>
+    <div class="p-3 mb-3">
+      <img src='https://habrastorage.org/getpro/habr/post_images/548/aa0/c55/548aa0c5510183d965d2b6417464fac6.jpg' class="img-thumbnail">
+    </div>
+      <p>Вместо эпиграфа.
+          Больше всего лайков собирают «котики». Можно ли это считать признаком эпидемии токсоплазмоза?</p>
+      <a href="https://habr.com/ru/post/442714/" title="Посмотреть на habr" target="_blank">
+        <button class="btn btn-warning">
+          Посмотреть
+        </button>
+      </a>
+    </p>
+  </div>
+  {% endblock aside_section %}

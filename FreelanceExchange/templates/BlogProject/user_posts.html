@@ -1,0 +1,76 @@
+{% extends 'BlogProject/main.html' %}
+  {% block main_section %}
+  <h2>Все статьи от автора {{view.kwargs.username}}</h2>
+  <h4>Количество: {{page_obj.paginator.count}}</h4>
+    {% for post in news %}
+      <div class="alert alert-light">
+        <h1>{{post.title }}</h1>
+        <p>{{post.text|striptags|truncatechars:320 }}</p>
+        <div class="row">
+          <div>
+            <img src="{{post.avtor.profile.img.url }}" alt="{{post.avtor}}" class="user_image">
+          </div>
+          <div class="mt-2">
+            <span class="text-muted"><b>Дата: </b>{{post.date|date:"d F Y в H:i:s"}}</span>
+            {% if post.avtor %}
+              <p><b>Автор: </b><a href="{% url 'user-post' post.avtor %}">{{post.avtor}}</a></p>
+            {% else %}
+              <p><b>Автор: </b><a href="{% url 'user-post' post.avtor %}">Администратор</a></p>
+            {% endif %}
+          </div>
+        </div>
+        <a href="{% url 'post-detail' post.id %}" class="btn btn-outline-warning">Читать далее</a>
+      </div>
+    {% endfor %}
+
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a href="?page=1" class="btn btn-outline-warning">Начало</a>
+        <a href="?page={{page_obj.previous_page_number}}" class="btn btn-outline-warning">Предыдущая</a>
+      {% endif %}
+
+      {%for num in page_obj.paginator.page_range%}
+        {% if num == page_obj.number %}
+          <button class="btn btn-warning" name="button">{{num}}</button>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a href="?page={{num}}" class="btn btn-outline-warning">{{num}}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-warning">Следующая</a>
+        <a href="?page={{page_obj.paginator.num_pages }}" class="btn btn-outline-warning">Последняя</a>
+      {% endif %}
+    {% endif %}
+{% endblock main_section %}
+
+{% block aside_section %}
+  <div class='p-3 rounded nb-3'>
+  <p>
+    <h3><b>Знакомство с простейшей нейронной сетью и ее пошаговая реализация</b></h3>
+    <div class="p-3 mb-3">
+      <img src='https://habrastorage.org/getpro/habr/post_images/747/592/94e/74759294e47907f3e8ba14438ab66001.jpg' class="img-thumbnail">
+    </div>
+    <p>Эта статья для тех, кто хочет заниматься нейронными сетями и машинным обучением, но пока с трудом понимает эту удивительную область науки. Ниже будет описан самый простой скелет
+    кода нейронной сети, чтобы многие поняли простейший принцип построения и взаимодействия всего того, из чего состоит эта нейронная сеть.</p>
+    <a href="https://habr.com/ru/post/440190/" title="Посмотреть на habr" target="_blank">
+      <button class="btn btn-warning">
+        Посмотреть
+      </button>
+    </a>
+  </p>
+  <p>
+    <h3><b>Разгоняем обработку событий до 1,6 миллионов в секунду</b></h3>
+    <div class="p-3 mb-3">
+      <img src='https://habrastorage.org/webt/q8/s-/cq/q8s-cqlxfrv8abkdotnudzeq1u8.jpeg' class="img-thumbnail">
+    </div>
+    <p>Когда участники HighLoad++ пришли на доклад Александра Крашенинникова, они надеялись услышать про обработку 1 600 000 событий в секунду. Ожидания не оправдались…
+      Потому что во время подготовки к выступлению эта цифра улетела до 1 800 000 — так, на HighLoad++ реальность превосходит ожидания.</p>
+    <a href="https://habr.com/ru/company/badoo/blog/442616/" title="Посмотреть на habr" target="_blank">
+      <button class="btn btn-warning">
+        Посмотреть
+      </button>
+    </a>
+  </p>
+  </div>
+{% endblock aside_section %}
