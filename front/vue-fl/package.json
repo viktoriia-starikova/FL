@@ -15,7 +15,7 @@
     "debug": "^4.1.1",
     "fuse.js": "^3.4.6",
     "jquery": "^3.4.1",
-    "luxon": "^1.21.3",
+    "luxon": "^2.5.2",
     "vue": "^2.6.11",
     "vue-datetime": "^1.0.0-beta.11",
     "vue-message": "^1.4.3",
